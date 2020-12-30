@@ -85,7 +85,7 @@ public class BinarySearchTreeImpl {
         }
     }
 
-    public void delete(Node nodeToDelete) {
+    private void delete(Node nodeToDelete) {
         if (nodeToDelete.getLeft() == null) {
             transplant(nodeToDelete, nodeToDelete.getRight());
         } else {
@@ -194,5 +194,25 @@ public class BinarySearchTreeImpl {
                 return false;
         }
         return true;
+    }
+
+    public Node maximum() {
+        return this.root.maximum();
+    }
+
+    public Node successor(int key) {
+        Node node = search(key);
+        if (node != null) {
+            return node.successor();
+        } else {
+            return null;
+        }
+    }
+
+    public void delete(int key) {
+        Node node = search(key);
+        if (node != null) {
+            delete(node);
+        }
     }
 }
