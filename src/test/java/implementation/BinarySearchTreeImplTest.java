@@ -134,4 +134,19 @@ class BinarySearchTreeImplTest {
         binarySearchTree.delete(6);
         binarySearchTree.print();
     }
+
+    @Test
+    public void printTest() {
+        BinarySearchTreeImpl binarySearchTree = new BinarySearchTreeImpl(4);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(6);
+
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(3);
+
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(7);
+
+        binarySearchTree.print();
+    }
 }

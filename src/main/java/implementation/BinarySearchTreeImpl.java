@@ -8,7 +8,8 @@ import java.util.List;
 
 @ToString
 public class BinarySearchTreeImpl {
-    
+
+    private static final int SIZE_NUMBER = 5;
     private Node root;
     
     public BinarySearchTreeImpl(Node root) {
@@ -122,8 +123,46 @@ public class BinarySearchTreeImpl {
     public void print() {
         int maxLevel = maxLevel();
 
+        System.out.println("INTERNAL METHOD");
         printNodeInternal(Collections.singletonList(root), 1, maxLevel);
+        System.out.println("OWN METHOD");
+        print(Collections.singletonList(root), 1, maxLevel);
 
+    }
+
+    private void print(List<Node> nodes, int level, int maxLevel) {
+        if(maxLevel < level) return;
+        int total = (int) Math.pow(2, maxLevel) - 1;
+        int spaceInterval = total / (int) Math.pow(2, level);
+        spaceInterval = spaceInterval * SIZE_NUMBER;
+        List<Node> newNodes = new ArrayList<>();
+        for (int i = 0; i < nodes.size(); i++) {
+            Node node = nodes.get(i);
+            if (i == 0) {
+                printWhitespaces(spaceInterval);
+            } else {
+                printWhitespaces(spaceInterval);
+                printWhitespaces(SIZE_NUMBER);
+                printWhitespaces(spaceInterval);
+            }
+            if(node != null) {
+                printNode(node);
+                newNodes.add(node.getLeft());
+                newNodes.add(node.getRight());
+            } else{
+                printWhitespaces(SIZE_NUMBER);
+                //System.out.print(" NULL");
+                newNodes.add(null);
+                newNodes.add(null);
+            }
+        }
+        System.out.println();
+        level++;
+        print(newNodes, level, maxLevel);
+    }
+
+    private void printNode(Node node) {
+        System.out.printf("%1$5s", node.getKey());
     }
 
     //https://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
